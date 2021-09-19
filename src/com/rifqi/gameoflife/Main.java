@@ -126,22 +126,23 @@ class Menu{
         System.out.println("2. Set up your own game.");
         System.out.print("Your answer (1 or 2): ");
         gameMode = reader.nextInt();
-        if (gameMode == 1){
-            System.out.println("\n# Please choose game pattern: ");
-            System.out.println("1. Pulsar (period 3)");
-            System.out.println("2. Gosper's Glider Gun");
-            System.out.println("3. The R-pentomino");
-            System.out.print("Your answer (1, 2, or 3): ");
-            gamePattern = reader.nextInt();
-            switch (gamePattern) {
-                case 1 -> initPulsarPattern();
-                case 2 -> initGosperGliderGun();
-                case 3 -> System.out.println("this feature has not implemented yet, you'll get error!!");
-                default -> System.out.println("Error: you can only choose 1, 2, or 3!");
+        switch (gameMode){
+            case 1 -> {
+                System.out.println("\n# Please choose game pattern: ");
+                System.out.println("1. Pulsar (period 3)");
+                System.out.println("2. Gosper's Glider Gun");
+                System.out.println("3. The R-pentomino");
+                System.out.print("Your answer (1, 2, or 3): ");
+                gamePattern = reader.nextInt();
+                switch (gamePattern) {
+                    case 1 -> initPulsarPattern();
+                    case 2 -> initGosperGliderGun();
+                    case 3 -> initRPentomino();
+                    default -> System.out.println("Error: you can only choose 1, 2, or 3!");
+                }
             }
-
-        }else {
-            setUpGame();
+            case 2 -> setUpGame();
+            default -> System.out.println("Error: you can only choose 1 or 2!");
         }
         System.out.println("\n----------- Game of Life Begins! -----------");
     }
@@ -283,7 +284,20 @@ class Menu{
         this.grid = grid;
     }
 
+    public void initRPentomino(){
+        generations = 500;
+        gridWidth = 45;
+        gridHeight = 35;
+        int [][] grid = new int[gridWidth][gridHeight];
 
+        grid[22][17] = 1;
+        grid[21][17] = 1;
+        grid[22][16] = 1;
+        grid[23][16] = 1;
+        grid[22][18] = 1;
+
+        this.grid = grid;
+    }
 
     public void setUpGame(){
         System.out.println("\n# Game Settings");
