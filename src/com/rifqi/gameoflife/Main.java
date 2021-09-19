@@ -14,14 +14,12 @@ class Game{
         this.grid = grid;
     }
 
-    public void printGrid() {
+    public void drawGrid() {
         for (int y = 0; y < gridHeight + 2; y++) {
             StringBuilder line = new StringBuilder();
             //checking if at top or bottom of line
             if (y == 0 || y == gridHeight + 1){
-                for (int x = 0; x < gridWidth + 2; x++) {
-                    line.append(" = ");
-                }
+                line.append(" = ".repeat(Math.max(0, gridWidth + 2)));
             }else {
                 for (int x = 0; x < gridWidth + 2; x++) {
                     //checking if at beginning or end of line
@@ -115,14 +113,12 @@ public class Main {
         game.setAlive(game.grid,3,2);
         game.setAlive(game.grid,4,2);
 
-        game.printGrid();
+        game.drawGrid();
         game.next();
-        game.printGrid();
+        game.drawGrid();
         game.next();
-        game.printGrid();
+        game.drawGrid();
         game.next();
 
     }
-
-
 }
