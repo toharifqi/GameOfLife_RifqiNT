@@ -38,6 +38,7 @@ public class Main {
             whenTopOrBottom(y, line);
             System.out.println(line);
         }
+        System.out.println("");
     }
 
     public void setAlive(int[][] grid, int x, int y){
@@ -74,6 +75,32 @@ public class Main {
         }
     }
 
+    public void next(){
+        int[][] newGrid = new int[gridWidth][gridHeight];
+
+        for (int y = 0; y < gridHeight; y++) {
+            for (int x = 0; x < gridHeight; x++) {
+                int aliveDots = countAliveDots(x, y);
+                if (getDotState(x, y) == 1){
+                    if (aliveDots < 2){
+                        setDead(newGrid, x, y);
+                    }else if (aliveDots < 4){
+                        setAlive(newGrid, x, y);
+                    }else{
+                        setDead(newGrid, x, y);
+                    }
+                }else {
+                    if (aliveDots == 3){
+                        setAlive(newGrid, x, y);
+                    }
+                }
+            }
+        }
+        grid = newGrid;
+    }
+
+
+
     public static void main(String[] args) {
         Main game = new Main(8, 8);
 
@@ -82,7 +109,11 @@ public class Main {
         game.setAlive(game.grid,4,2);
 
         game.printGrid();
-        System.out.println("alive neighbour: " + (game.countAliveDots(3, 2)));
+        game.next();
+        game.printGrid();
+        game.next();
+        game.printGrid();
+        game.next();
 
     }
 
