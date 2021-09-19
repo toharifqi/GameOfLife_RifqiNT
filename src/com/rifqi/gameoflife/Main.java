@@ -1,15 +1,17 @@
 package com.rifqi.gameoflife;
 
-public class Main {
+class Game{
     int gridWidth;
     int gridHeight;
+    /*why i use int 2 dimensional array instead of boolean 2D array?
+    -> because I want to add the element of living cells to the counting directly (I don't need to check if the cell
+    is alive or not, note: alive cell = 1; dead cell = 0)*/
     int[][] grid;
 
-    public Main(int gridWidth, int gridHeight) {
-        this.gridHeight = gridHeight;
-        this.gridWidth = gridWidth;
-
-        this.grid = new int[gridWidth][gridHeight];
+    public Game(int[][] grid) {
+        this.gridWidth = grid.length;
+        this.gridHeight = grid[0].length;
+        this.grid = grid;
     }
 
     public void printGrid() {
@@ -98,11 +100,16 @@ public class Main {
         }
         grid = newGrid;
     }
+}
 
+class Menu{
 
+}
 
+public class Main {
     public static void main(String[] args) {
-        Main game = new Main(8, 8);
+        int[][] grid = new int[8][8];
+        Game game = new Game(grid);
 
         game.setAlive(game.grid, 2,2);
         game.setAlive(game.grid,3,2);
