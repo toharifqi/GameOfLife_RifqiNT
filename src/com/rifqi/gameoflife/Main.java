@@ -1,5 +1,7 @@
 package com.rifqi.gameoflife;
 
+import java.util.Scanner;
+
 class Game{
     int gridWidth;
     int gridHeight;
@@ -98,27 +100,74 @@ class Game{
         }
         grid = newGrid;
     }
+
+    public void drawAndNext(){
+        drawGrid();
+        next();
+    }
 }
 
 class Menu{
+    Scanner reader = new Scanner(System.in);
+    int generations;
+    int gridHeight;
+    int gridWidth;
+    int numOfCells;
+    int[][] grid;
 
+    public void printMenu() {
+        System.out.println("*************** GAME OF LIFE ***************");
+        System.out.println("               Rifqi Naufal T\n");
+        System.out.println("\n# Game Settings");
+        System.out.print("Please input the number of generations (integer): ");
+        generations = reader.nextInt();
+        System.out.print("Please input grid width (integer): ");
+        gridWidth = reader.nextInt();
+        System.out.print("Please input grid height (integer): ");
+        gridHeight = reader.nextInt();
+        int [][] grid = new int[gridWidth][gridHeight];
+        System.out.println("\n# Cells Initialization");
+        System.out.print("Please input number of initial cells (integer): ");
+        numOfCells = reader.nextInt();
+        while (numOfCells <= 0 || numOfCells > gridWidth * gridHeight){
+            System.out.println("Number of initial cells cannot be 0, negative, or more than " + gridWidth * gridHeight);
+            System.out.print("Please input again: ");
+            numOfCells = reader.nextInt();
+        }
+        for (int i = 1; i <= numOfCells; i++) {
+            System.out.println("Insert coordinate for cell " + i + " to be alive.");
+            System.out.print("X: ");
+            int x = reader.nextInt();
+            while (x < 0 || x >= gridWidth){
+                System.out.print("X must be in range of 0 to " + (gridWidth-1) + ", input X again: ");
+                x = reader.nextInt();
+            }
+            System.out.print("Y: ");
+            int y = reader.nextInt();
+            while (y < 0 || y >= gridHeight){
+                System.out.print("Y must be in range of 0 to " + (gridHeight-1) + ", input Y again: ");
+                y = reader.nextInt();
+            }
+            grid[x][y] = 1;
+        }
+        this.grid = grid;
+        System.out.println("\n----------- Game of Life Begins! -----------");
+    }
+
+    public void setUpGame(){
+
+    }
 }
 
 public class Main {
     public static void main(String[] args) {
-        int[][] grid = new int[8][8];
-        Game game = new Game(grid);
-
-        game.setAlive(game.grid, 2,2);
-        game.setAlive(game.grid,3,2);
-        game.setAlive(game.grid,4,2);
-
-        game.drawGrid();
-        game.next();
-        game.drawGrid();
-        game.next();
-        game.drawGrid();
-        game.next();
+        Menu menu = new Menu();
+        menu.printMenu();
+        Game game = new Game(menu.grid);
+        for (int i = 1; i <= menu.generations; i++) {
+            System.out.println("Generation #" + i);
+            game.drawAndNext();
+        }
 
     }
 }
