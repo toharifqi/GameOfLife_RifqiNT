@@ -81,7 +81,7 @@ class Game{
         int[][] newGrid = new int[gridWidth][gridHeight];
 
         for (int y = 0; y < gridHeight; y++) {
-            for (int x = 0; x < gridHeight; x++) {
+            for (int x = 0; x < gridWidth; x++) {
                 int aliveNeighbours = countNeighbour(x, y);
                 if (getCellState(x, y) == 1){
                     if (aliveNeighbours < 2) {
@@ -110,6 +110,7 @@ class Game{
 class Menu{
     Scanner reader = new Scanner(System.in);
     int gameMode;
+    int gamePattern;
     int generations;
     int gridHeight;
     int gridWidth;
@@ -126,11 +127,85 @@ class Menu{
         System.out.print("Your answer (1 or 2): ");
         gameMode = reader.nextInt();
         if (gameMode == 1){
-            initGosperGliderGun();
+            System.out.println("\n# Please choose game pattern: ");
+            System.out.println("1. Pulsar (period 3)");
+            System.out.println("2. Gosper's Glider Gun");
+            System.out.println("3. The R-pentomino");
+            System.out.print("Your answer (1, 2, or 3): ");
+            gamePattern = reader.nextInt();
+            switch (gamePattern) {
+                case 1 -> initPulsarPattern();
+                case 2 -> initGosperGliderGun();
+                case 3 -> System.out.println("this feature has not implemented yet, you'll get error!!");
+                default -> System.out.println("Error: you can only choose 1, 2, or 3!");
+            }
+
         }else {
             setUpGame();
         }
         System.out.println("\n----------- Game of Life Begins! -----------");
+    }
+
+    public void initPulsarPattern(){
+        generations = 1000;
+        gridWidth = 17;
+        gridHeight = 17;
+        int [][] grid = new int[gridWidth][gridHeight];
+        grid[4][2] = 1;
+        grid[5][2] = 1;
+        grid[6][2] = 1;
+        grid[10][2] = 1;
+        grid[11][2] = 1;
+        grid[12][2] = 1;
+
+        grid[2][4] = 1;
+        grid[2][5] = 1;
+        grid[2][6] = 1;
+        grid[7][4] = 1;
+        grid[7][5] = 1;
+        grid[7][6] = 1;
+        grid[9][4] = 1;
+        grid[9][5] = 1;
+        grid[9][6] = 1;
+        grid[14][4] = 1;
+        grid[14][5] = 1;
+        grid[14][6] = 1;
+
+        grid[4][7] = 1;
+        grid[5][7] = 1;
+        grid[6][7] = 1;
+        grid[10][7] = 1;
+        grid[11][7] = 1;
+        grid[12][7] = 1;
+
+        grid[4][9] = 1;
+        grid[5][9] = 1;
+        grid[6][9] = 1;
+        grid[10][9] = 1;
+        grid[11][9] = 1;
+        grid[12][9] = 1;
+
+        grid[2][10] = 1;
+        grid[2][11] = 1;
+        grid[2][12] = 1;
+        grid[7][10] = 1;
+        grid[7][11] = 1;
+        grid[7][12] = 1;
+        grid[9][10] = 1;
+        grid[9][11] = 1;
+        grid[9][12] = 1;
+        grid[14][10] = 1;
+        grid[14][11] = 1;
+        grid[14][12] = 1;
+
+        grid[4][14] = 1;
+        grid[5][14] = 1;
+        grid[6][14] = 1;
+        grid[10][14] = 1;
+        grid[11][14] = 1;
+        grid[12][14] = 1;
+
+        this.grid = grid;
     }
 
     public void initGosperGliderGun(){
@@ -208,67 +283,7 @@ class Menu{
         this.grid = grid;
     }
 
-    public void initOscillatorsPattern(){
-        generations = 1000;
-        gridWidth = 17;
-        gridHeight = 17;
-        int [][] grid = new int[gridWidth][gridHeight];
-        grid[4][2] = 1;
-        grid[5][2] = 1;
-        grid[6][2] = 1;
-        grid[10][2] = 1;
-        grid[11][2] = 1;
-        grid[12][2] = 1;
 
-        grid[2][4] = 1;
-        grid[2][5] = 1;
-        grid[2][6] = 1;
-        grid[7][4] = 1;
-        grid[7][5] = 1;
-        grid[7][6] = 1;
-        grid[9][4] = 1;
-        grid[9][5] = 1;
-        grid[9][6] = 1;
-        grid[14][4] = 1;
-        grid[14][5] = 1;
-        grid[14][6] = 1;
-
-        grid[4][7] = 1;
-        grid[5][7] = 1;
-        grid[6][7] = 1;
-        grid[10][7] = 1;
-        grid[11][7] = 1;
-        grid[12][7] = 1;
-
-        grid[4][9] = 1;
-        grid[5][9] = 1;
-        grid[6][9] = 1;
-        grid[10][9] = 1;
-        grid[11][9] = 1;
-        grid[12][9] = 1;
-
-        grid[2][10] = 1;
-        grid[2][11] = 1;
-        grid[2][12] = 1;
-        grid[7][10] = 1;
-        grid[7][11] = 1;
-        grid[7][12] = 1;
-        grid[9][10] = 1;
-        grid[9][11] = 1;
-        grid[9][12] = 1;
-        grid[14][10] = 1;
-        grid[14][11] = 1;
-        grid[14][12] = 1;
-
-        grid[4][14] = 1;
-        grid[5][14] = 1;
-        grid[6][14] = 1;
-        grid[10][14] = 1;
-        grid[11][14] = 1;
-        grid[12][14] = 1;
-
-        this.grid = grid;
-    }
 
     public void setUpGame(){
         System.out.println("\n# Game Settings");
