@@ -12,30 +12,30 @@ public class Main {
         this.grid = new int[gridWidth][gridHeight];
     }
 
-    public void whenTopOrBottom(int y, StringBuilder line) {
-        if (y == 0 || y == gridHeight + 1) {
-            line.append(" _");
-        } else {
-            line.append(" |");
-        }
-    }
-
     public void printGrid() {
         for (int y = 0; y < gridHeight + 2; y++) {
             StringBuilder line = new StringBuilder();
-            whenTopOrBottom(y, line);
-            for (int x = 0; x < gridWidth; x++) {
-                if (y == 0 || y == gridHeight + 1) {
-                    line.append(" _");
-                } else {
-                    if (grid[x][y - 1] == 0) {
-                        line.append(" .");
-                    } else {
-                        line.append(" *");
+            //checking if at top or bottom of line
+            if (y == 0 || y == gridHeight + 1){
+                for (int x = 0; x < gridWidth + 2; x++) {
+                    line.append(" = ");
+                }
+            }else {
+                for (int x = 0; x < gridWidth + 2; x++) {
+                    //checking if at beginning or end of line
+                    if (x == 0 || x == gridWidth + 1){
+                        line.append(" | ");
+                    }
+                    //if not at the edge of grid, print the content of array grid
+                    else {
+                        if (grid[x - 1][y - 1] == 0){
+                            line.append(" . ");
+                        }else {
+                            line.append(" * ");
+                        }
                     }
                 }
             }
-            whenTopOrBottom(y, line);
             System.out.println(line);
         }
         System.out.println("");
@@ -49,25 +49,25 @@ public class Main {
         grid[x][y] = 0;
     }
 
-    public int countAliveDots(int x, int y){
+    public int countAliveCells(int x, int y){
         int count = 0;
 
-        count += getDotState(x - 1, y - 1);
-        count += getDotState(x, y - 1);
-        count += getDotState(x + 1, y - 1);
+        count += getCellState(x - 1, y - 1);
+        count += getCellState(x, y - 1);
+        count += getCellState(x + 1, y - 1);
 
-        count += getDotState(x - 1, y);
-        count += getDotState(x + 1, y);
+        count += getCellState(x - 1, y);
+        count += getCellState(x + 1, y);
 
-        count += getDotState(x - 1, y + 1);
-        count += getDotState(x, y + 1);
-        count += getDotState(x + 1, y + 1);
+        count += getCellState(x - 1, y + 1);
+        count += getCellState(x, y + 1);
+        count += getCellState(x + 1, y + 1);
 
         return count;
     }
 
-    public int getDotState(int x, int y){
-        //check if the corresponding dot is outside the board
+    public int getCellState(int x, int y){
+        //check if the corresponding cell is outside the board
         if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight){
             return 0;
         }else {
@@ -80,17 +80,17 @@ public class Main {
 
         for (int y = 0; y < gridHeight; y++) {
             for (int x = 0; x < gridHeight; x++) {
-                int aliveDots = countAliveDots(x, y);
-                if (getDotState(x, y) == 1){
-                    if (aliveDots < 2){
+                int aliveCells = countAliveCells(x, y);
+                if (getCellState(x, y) == 1){
+                    if (aliveCells < 2){
                         setDead(newGrid, x, y);
-                    }else if (aliveDots < 4){
+                    }else if (aliveCells < 4){
                         setAlive(newGrid, x, y);
                     }else{
                         setDead(newGrid, x, y);
                     }
                 }else {
-                    if (aliveDots == 3){
+                    if (aliveCells == 3){
                         setAlive(newGrid, x, y);
                     }
                 }
