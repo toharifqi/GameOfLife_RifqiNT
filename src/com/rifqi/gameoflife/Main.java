@@ -126,11 +126,73 @@ class Menu{
         System.out.print("Your answer (1 or 2): ");
         gameMode = reader.nextInt();
         if (gameMode == 1){
-            System.out.println("This feature isn't developed yet, you'll get error!");
+            initPreGame();
         }else {
             setUpGame();
         }
         System.out.println("\n----------- Game of Life Begins! -----------");
+    }
+
+    public void initPreGame(){
+        generations = 1000;
+        gridWidth = 17;
+        gridHeight = 17;
+        int [][] grid = new int[gridWidth][gridHeight];
+        grid[4][2] = 1;
+        grid[5][2] = 1;
+        grid[6][2] = 1;
+        grid[10][2] = 1;
+        grid[11][2] = 1;
+        grid[12][2] = 1;
+
+        grid[2][4] = 1;
+        grid[2][5] = 1;
+        grid[2][6] = 1;
+        grid[7][4] = 1;
+        grid[7][5] = 1;
+        grid[7][6] = 1;
+        grid[9][4] = 1;
+        grid[9][5] = 1;
+        grid[9][6] = 1;
+        grid[14][4] = 1;
+        grid[14][5] = 1;
+        grid[14][6] = 1;
+
+        grid[4][7] = 1;
+        grid[5][7] = 1;
+        grid[6][7] = 1;
+        grid[10][7] = 1;
+        grid[11][7] = 1;
+        grid[12][7] = 1;
+
+        grid[4][9] = 1;
+        grid[5][9] = 1;
+        grid[6][9] = 1;
+        grid[10][9] = 1;
+        grid[11][9] = 1;
+        grid[12][9] = 1;
+
+        grid[2][10] = 1;
+        grid[2][11] = 1;
+        grid[2][12] = 1;
+        grid[7][10] = 1;
+        grid[7][11] = 1;
+        grid[7][12] = 1;
+        grid[9][10] = 1;
+        grid[9][11] = 1;
+        grid[9][12] = 1;
+        grid[14][10] = 1;
+        grid[14][11] = 1;
+        grid[14][12] = 1;
+
+        grid[4][14] = 1;
+        grid[5][14] = 1;
+        grid[6][14] = 1;
+        grid[10][14] = 1;
+        grid[11][14] = 1;
+        grid[12][14] = 1;
+
+        this.grid = grid;
     }
 
     public void setUpGame(){
