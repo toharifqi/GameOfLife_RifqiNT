@@ -33,7 +33,7 @@ class Game{
                         if (grid[x - 1][y - 1] == 0){
                             line.append(" . ");
                         }else {
-                            line.append(" * ");
+                            line.append(" # ");
                         }
                     }
                 }
@@ -51,7 +51,7 @@ class Game{
         grid[x][y] = 0;
     }
 
-    public int countAliveCells(int x, int y){
+    public int countNeighbour(int x, int y){
         int count = 0;
 
         count += getCellState(x - 1, y - 1);
@@ -82,17 +82,17 @@ class Game{
 
         for (int y = 0; y < gridHeight; y++) {
             for (int x = 0; x < gridHeight; x++) {
-                int aliveCells = countAliveCells(x, y);
+                int aliveNeighbours = countNeighbour(x, y);
                 if (getCellState(x, y) == 1){
-                    if (aliveCells < 2){
+                    if (aliveNeighbours < 2) {
                         setDead(newGrid, x, y);
-                    }else if (aliveCells < 4){
+                    } else if (aliveNeighbours < 4) {
                         setAlive(newGrid, x, y);
-                    }else{
+                    } else {
                         setDead(newGrid, x, y);
                     }
                 }else {
-                    if (aliveCells == 3){
+                    if (aliveNeighbours == 3){
                         setAlive(newGrid, x, y);
                     }
                 }
@@ -126,14 +126,89 @@ class Menu{
         System.out.print("Your answer (1 or 2): ");
         gameMode = reader.nextInt();
         if (gameMode == 1){
-            initPreGame();
+            initGosperGliderGun();
         }else {
             setUpGame();
         }
         System.out.println("\n----------- Game of Life Begins! -----------");
     }
 
-    public void initPreGame(){
+    public void initGosperGliderGun(){
+        generations = 1000;
+        gridWidth = 38;
+        gridHeight = 24;
+        int [][] grid = new int[gridWidth][gridHeight];
+
+        grid[1][5] = 1;
+        grid[1][6] = 1;
+        grid[2][5] = 1;
+        grid[2][6] = 1;
+
+        grid[11][5]= 1;
+        grid[11][6]= 1;
+        grid[11][7]= 1;
+
+        grid[12][4]= 1;
+        grid[12][8]= 1;
+
+        grid[13][3]= 1;
+        grid[13][9]= 1;
+
+        grid[14][3]= 1;
+        grid[14][9]= 1;
+
+        grid[15][6]= 1;
+
+        grid[16][4]= 1;
+        grid[16][8]= 1;
+
+        grid[17][5]= 1;
+        grid[17][6]= 1;
+        grid[17][7]= 1;
+
+        grid[18][6]= 1;
+
+        grid[21][3]= 1;
+        grid[21][4]= 1;
+        grid[21][5]= 1;
+
+        grid[22][3]= 1;
+        grid[22][4]= 1;
+        grid[22][5]= 1;
+
+        grid[23][2]= 1;
+        grid[23][6]= 1;
+
+        grid[25][1]= 1;
+        grid[25][2]= 1;
+        grid[25][6]= 1;
+        grid[25][7]= 1;
+
+        grid[24][10] = 1;
+        grid[24][12] = 1;
+
+        grid[25][11] = 1;
+        grid[25][12] = 1;
+
+        grid[26][11] = 1;
+
+        grid[31][18] = 1;
+
+        grid[32][19] = 1;
+        grid[32][20] = 1;
+
+        grid[33][18] = 1;
+        grid[33][19] = 1;
+
+        grid[35][3]= 1;
+        grid[35][4]= 1;
+        grid[36][3]= 1;
+        grid[36][4]= 1;
+
+        this.grid = grid;
+    }
+
+    public void initOscillatorsPattern(){
         generations = 1000;
         gridWidth = 17;
         gridHeight = 17;
