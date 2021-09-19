@@ -48,6 +48,32 @@ public class Main {
         grid[x][y] = 0;
     }
 
+    public int countAliveDots(int x, int y){
+        int count = 0;
+
+        count += getDotState(x - 1, y - 1);
+        count += getDotState(x, y - 1);
+        count += getDotState(x + 1, y - 1);
+
+        count += getDotState(x - 1, y);
+        count += getDotState(x + 1, y);
+
+        count += getDotState(x - 1, y + 1);
+        count += getDotState(x, y + 1);
+        count += getDotState(x + 1, y + 1);
+
+        return count;
+    }
+
+    public int getDotState(int x, int y){
+        //check if the corresponding dot is outside the board
+        if (x < 0 || x >= gridWidth || y < 0 || y >= gridHeight){
+            return 0;
+        }else {
+            return grid[x][y];
+        }
+    }
+
     public static void main(String[] args) {
         Main game = new Main(8, 8);
 
@@ -56,6 +82,7 @@ public class Main {
         game.setAlive(game.grid,4,2);
 
         game.printGrid();
+        System.out.println("alive neighbour: " + (game.countAliveDots(3, 2)));
 
     }
 
