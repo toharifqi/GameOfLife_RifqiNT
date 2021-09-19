@@ -40,7 +40,7 @@ class Game{
             }
             System.out.println(line);
         }
-        System.out.println("");
+        System.out.print("\n");
     }
 
     public void setAlive(int[][] grid, int x, int y){
@@ -109,6 +109,7 @@ class Game{
 
 class Menu{
     Scanner reader = new Scanner(System.in);
+    int gameMode;
     int generations;
     int gridHeight;
     int gridWidth;
@@ -118,6 +119,21 @@ class Menu{
     public void printMenu() {
         System.out.println("*************** GAME OF LIFE ***************");
         System.out.println("               Rifqi Naufal T\n");
+        System.out.println("# Game Mode");
+        System.out.println("Please choose game mode: ");
+        System.out.println("1. Play with pre-defined inputs.");
+        System.out.println("2. Set up your own game.");
+        System.out.print("Your answer (1 or 2): ");
+        gameMode = reader.nextInt();
+        if (gameMode == 1){
+            System.out.println("This feature isn't developed yet, you'll get error!");
+        }else {
+            setUpGame();
+        }
+        System.out.println("\n----------- Game of Life Begins! -----------");
+    }
+
+    public void setUpGame(){
         System.out.println("\n# Game Settings");
         System.out.print("Please input the number of generations (integer): ");
         generations = reader.nextInt();
@@ -151,11 +167,6 @@ class Menu{
             grid[x][y] = 1;
         }
         this.grid = grid;
-        System.out.println("\n----------- Game of Life Begins! -----------");
-    }
-
-    public void setUpGame(){
-
     }
 }
 
